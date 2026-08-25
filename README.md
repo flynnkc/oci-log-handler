@@ -22,7 +22,7 @@ from oci_log_handler import OciLoggingHandler
 config = oci.config.from_file()
 
 handler = OciLoggingHandler(
-    log_ocid="ocid1.log.oc1..example",
+    "ocid1.log.oc1..example",
     config=config,
     capacity=100,
 )
@@ -48,7 +48,7 @@ config = oci.config.from_file()
 client = loggingingestion.LoggingClient(config)
 
 handler = OciLoggingHandler(
-    log_ocid="ocid1.log.oc1..example",
+    "ocid1.log.oc1..example",
     client=client,
     capacity=100,
 )
@@ -59,6 +59,30 @@ logger.addHandler(handler)
 
 For signer-based authentication, pass `signer=` when constructing the handler
 or create the `LoggingClient` with your signer and pass it as `client=`.
+
+## Handler arguments
+
+`OciLoggingHandler` takes the target OCI log OCID as its first argument:
+
+```python
+OciLoggingHandler("ocid1.log.oc1..example", ...)
+```
+
+Optional keyword arguments:
+
+- `config`: OCI SDK config dictionary.
+- `signer`: OCI signer to use instead of config-file key authentication.
+- `capacity`: number of log records to buffer before flushing. Defaults to
+  `100`.
+- `client`: existing `oci.loggingingestion.LoggingClient`. When provided,
+  `config` and `signer` are not used to create a client.
+- `source`: OCI log entry batch source. Defaults to `"oci-log-handler"`.
+- `log_type`: OCI log entry batch type. Defaults to `"python_application"`.
+- `specversion`: OCI logs payload spec version. Defaults to `"1.0"`.
+- `raise_exceptions`: re-raise OCI submission errors instead of using
+  `logging.Handler.handleError`. Defaults to `False`.
+
+Provide one of `config`, `signer`, or `client`.
 
 ## Delivery behavior
 

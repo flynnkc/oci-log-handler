@@ -155,7 +155,7 @@ class OciLoggingHandlerTests(unittest.TestCase):
         with patch("oci_log_handler.handler.loggingingestion.LoggingClient") as client:
             OciLoggingHandler("ocid1.log.oc1..example", config={})
 
-        client.assert_called_once_with({}, signer=None)
+        client.assert_called_once_with({})
 
     def test_signer_is_allowed_without_config(self) -> None:
         signer = object()
@@ -163,7 +163,7 @@ class OciLoggingHandlerTests(unittest.TestCase):
         with patch("oci_log_handler.handler.loggingingestion.LoggingClient") as client:
             OciLoggingHandler("ocid1.log.oc1..example", signer=signer)
 
-        client.assert_called_once_with(None, signer=signer)
+        client.assert_called_once_with({}, signer=signer)
 
     def test_requires_positive_capacity(self) -> None:
         with self.assertRaisesRegex(ValueError, "capacity"):

@@ -40,7 +40,12 @@ class OciLoggingHandler(BufferingHandler):
 
         super().__init__(capacity)
         self.log_ocid = log_ocid
-        self.client = client or loggingingestion.LoggingClient(config, signer=signer)
+        if client is not None:
+            self.client = client
+        elif signer is not None:
+            self.client = loggingingestion.LoggingClient(config or {}, signer=signer)
+        else:
+            self.client = loggingingestion.LoggingClient(config)
         self.source = source
         self.log_type = log_type
         self.specversion = specversion
