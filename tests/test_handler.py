@@ -69,7 +69,9 @@ class OciLoggingHandlerTests(unittest.TestCase):
             client=client,
         )
 
-        handler.emit(logging.LogRecord("test", logging.INFO, __file__, 1, "msg", (), None))
+        handler.emit(
+            logging.LogRecord("test", logging.INFO, __file__, 1, "msg", (), None)
+        )
 
         self.assertEqual(handler.buffer, [])
         self.assertEqual(len(client.calls), 1)
@@ -87,7 +89,9 @@ class OciLoggingHandlerTests(unittest.TestCase):
         )
 
         first = logging.LogRecord("test", logging.INFO, __file__, 1, "first", (), None)
-        second = logging.LogRecord("test", logging.INFO, __file__, 2, "second", (), None)
+        second = logging.LogRecord(
+            "test", logging.INFO, __file__, 2, "second", (), None
+        )
         handler.emit(first)
         handler.emit(second)
 
@@ -103,7 +107,9 @@ class OciLoggingHandlerTests(unittest.TestCase):
         )
 
         with self.assertRaises(RuntimeError):
-            handler.emit(logging.LogRecord("test", logging.INFO, __file__, 1, "msg", (), None))
+            handler.emit(
+                logging.LogRecord("test", logging.INFO, __file__, 1, "msg", (), None)
+            )
 
     def test_requires_config_or_client(self) -> None:
         with self.assertRaisesRegex(ValueError, "config is required"):
