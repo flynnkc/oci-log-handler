@@ -37,20 +37,3 @@ handler.flush()
 By default, failed submissions are kept in a bounded retry buffer and do not
 raise exceptions into the application. Pass `raise_exceptions=True` if your
 application should fail fast when OCI submission fails.
-
-## Development
-
-```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -e . -r requirements-dev.txt
-.venv/bin/python -m unittest discover
-```
-
-## Publishing
-
-```bash
-.venv/bin/python -m build
-.venv/bin/python -m twine check dist/*
-.venv/bin/python -m twine upload --repository testpypi dist/*
-.venv/bin/python -m twine upload dist/*
-```
