@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
 authors = [
-  { name = "Oracle and/or its affiliates" }
+  { name = "KC Flynn" }
 ]
 keywords = ["oci", "oracle-cloud", "logging", "handler"]
 classifiers = [
@@ -30,6 +30,11 @@ classifiers = [
 dependencies = [
   "oci>=2.185.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/flynnkc/oci-log-handler"
+Repository = "https://github.com/flynnkc/oci-log-handler"
+Issues = "https://github.com/flynnkc/oci-log-handler/issues"
 
 [project.optional-dependencies]
 dev = [
