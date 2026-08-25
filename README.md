@@ -33,8 +33,32 @@ logger.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 logger.info("Application started")
-handler.flush()
 ```
+
+You can also pass an existing OCI Logging Ingestion client:
+
+```python
+import logging
+
+import oci
+from oci import loggingingestion
+from oci_log_handler import OciLoggingHandler
+
+config = oci.config.from_file()
+client = loggingingestion.LoggingClient(config)
+
+handler = OciLoggingHandler(
+    log_ocid="ocid1.log.oc1..example",
+    client=client,
+    capacity=100,
+)
+
+logger = logging.getLogger("my-app")
+logger.addHandler(handler)
+```
+
+For signer-based authentication, pass `signer=` when constructing the handler
+or create the `LoggingClient` with your signer and pass it as `client=`.
 
 ## Delivery behavior
 
