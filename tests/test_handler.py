@@ -3,9 +3,10 @@ from __future__ import annotations
 import logging
 import unittest
 from datetime import UTC, datetime
+from importlib.metadata import version
 from unittest.mock import patch
 
-from oci_log_handler import OciLoggingHandler
+from oci_log_handler import OciLoggingHandler, __version__
 
 
 class FakeClient:
@@ -20,6 +21,9 @@ class FakeClient:
 
 
 class OciLoggingHandlerTests(unittest.TestCase):
+    def test_package_version_comes_from_metadata(self) -> None:
+        self.assertEqual(__version__, version("oci-log-handler"))
+
     def test_flush_sends_buffered_records(self) -> None:
         client = FakeClient()
         handler = OciLoggingHandler(
