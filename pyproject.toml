@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "oci-log-handler"
-version = "0.1.0"
+version = "0.1.1"
 description = "A buffered Python logging handler for Oracle Cloud Infrastructure Logging."
 readme = "README.md"
 requires-python = ">=3.11"
