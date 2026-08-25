@@ -28,14 +28,14 @@ class OciLoggingHandler(BufferingHandler):
         capacity: int = 100,
         *,
         client: Any | None = None,
-        source: str = "oci-log-handler-0.1.0",
+        source: str = "oci-log-handler",
         log_type: str = "python_application",
         specversion: str = "1.0",
         raise_exceptions: bool = False,
     ) -> None:
         if capacity < 1:
             raise ValueError("capacity must be at least 1")
-        if client is None and config is None:
+        if client is None and config is None and signer is None:
             raise ValueError("config is required when client is not provided")
 
         super().__init__(capacity)

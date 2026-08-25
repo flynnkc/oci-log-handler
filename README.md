@@ -3,6 +3,8 @@
 A buffered Python `logging` handler that sends application logs to Oracle Cloud
 Infrastructure Logging by using the OCI Python SDK Logging Ingestion client.
 
+Requires Python 3.11 or later.
+
 ## Installation
 
 ```bash
@@ -34,6 +36,12 @@ logger.info("Application started")
 handler.flush()
 ```
 
-By default, failed submissions are kept in a bounded retry buffer and do not
-raise exceptions into the application. Pass `raise_exceptions=True` if your
-application should fail fast when OCI submission fails.
+## Delivery behavior
+
+This handler is best-effort and keeps its retry buffer in memory. By default,
+failed submissions are restored to the handler's bounded buffer and do not raise
+exceptions into the application. If the process exits before a later successful
+flush, those buffered records are not durable.
+
+Pass `raise_exceptions=True` if your application should fail fast when OCI
+submission fails.
