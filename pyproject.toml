@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oci-log-handler"
+version = "0.1.0"
+description = "A buffered Python logging handler for Oracle Cloud Infrastructure Logging."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Oracle and/or its affiliates" }
+]
+keywords = ["oci", "oracle-cloud", "logging", "handler"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Universal Permissive License (UPL)",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: System :: Logging",
+]
+dependencies = [
+  "oci>=2.185.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2",
+  "twine>=5",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+oci_log_handler = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
